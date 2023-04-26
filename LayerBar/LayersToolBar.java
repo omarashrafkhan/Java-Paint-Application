@@ -388,7 +388,7 @@ public class LayersToolBar extends Toolbar {
                         currentHexagon.setRadius((int) (Math.sqrt(dx_h * dx_h + dy_h * dy_h) / Math.sqrt(3)));
                     }
                     case "RA triangle pressed.png" -> currentRAtriangle.setEnd(e.getPoint());
-                    case "Bezier pressed.png" -> currentBezierCurve.mouseDrag(e);
+                    case "Bezier pressed.png" -> {if(ColorToolBar.getStrokeVal()>0) currentBezierCurve.mouseDrag(e);}
                 }
 
 
