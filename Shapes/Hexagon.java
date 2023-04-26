@@ -18,11 +18,11 @@ public class Hexagon extends Shape{
 //        this.radius = radius;
 //    }
 
-    public void setDragging(boolean dragging) {
-        this.dragging = dragging;
-    }
+//    public void setDragging(boolean dragging) {
+//        this.dragging = dragging;
+//    }
 
-    private boolean dragging;
+    //private boolean dragging;
 
     public Hexagon(int x, int y, Color fill, Color stroke, int strokeVal){
         this.x=x;
