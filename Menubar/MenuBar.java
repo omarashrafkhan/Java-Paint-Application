@@ -128,103 +128,121 @@ public class MenuBar extends Toolbar {
 
     //New, open, save, undo, redo functions of the submenus
     public void Open(Graphics g) {
-        if (ShapeToolBar.getActiveShape() != null) {
-            ShapeToolBar.getActiveShape().current_image = ShapeToolBar.getActiveShape().image_depressed;
-            ShapeToolBar.setActiveShape(null);
-        }
+        if (fileMenu.pressed) {
+            if (ShapeToolBar.getActiveShape() != null) {
+                ShapeToolBar.getActiveShape().current_image = ShapeToolBar.getActiveShape().image_depressed;
+                ShapeToolBar.setActiveShape(null);
+            }
 
-        int x = Toolkit.getDefaultToolkit().getScreenSize().width;
-        int y = Toolkit.getDefaultToolkit().getScreenSize().height;
+            int x = Toolkit.getDefaultToolkit().getScreenSize().width;
+            int y = Toolkit.getDefaultToolkit().getScreenSize().height;
 
-        int shadowOffset = 5;
-        g.setColor(Color.gray);
-        g.fillRect((x / 3) + shadowOffset, (y / 3) + shadowOffset, 500, 400);
+            int shadowOffset = 5;
+            g.setColor(Color.gray);
+            g.fillRect((x / 3) + shadowOffset, (y / 3) + shadowOffset, 500, 400);
 
-        g.setColor(Color.lightGray);
+            g.setColor(Color.lightGray);
 
-        Point start = new Point(x / 3, y / 3);
-        g.fillRect(start.x, start.y, 500, 400);
-        g.setColor(Color.white);
-        g.fillRect(start.x + 25, start.y + 50, 450, 300);
-        g.setFont(new Font("Arial", Font.BOLD, 15));
-        g.drawString("Files", x / 3 + 30, y / 3 + 35);
+            Point start = new Point(x / 3, y / 3);
+            g.fillRect(start.x, start.y, 500, 400);
+            g.setColor(Color.white);
+            g.fillRect(start.x + 25, start.y + 50, 450, 300);
+            g.setFont(new Font("Arial", Font.BOLD, 15));
+            g.drawString("Files", x / 3 + 30, y / 3 + 35);
 
-        g.setColor(Color.red);
-        g.fillRect(close.x, close.y, close.width, close.height);
-        g.setColor(Color.white);
-        g.drawString(close.title, close.x + 5, close.y + 20);
+            g.setColor(Color.red);
+            g.fillRect(close.x, close.y, close.width, close.height);
+            g.setColor(Color.white);
+            g.drawString(close.title, close.x + 5, close.y + 20);
 
 
-        g.setFont(new Font("Arial", Font.PLAIN, 12));
+            g.setFont(new Font("Arial", Font.PLAIN, 12));
 
-        for (FileButton fileButton : fileButtons) {
-            fileButton.paintFileButton(g);
+            for (FileButton fileButton : fileButtons) {
+                fileButton.paintFileButton(g);
+            }
+
         }
     }
 
     public void New() {
-        while (LayersToolBar.getLayers().size() > 1) {
-            LayersToolBar.getLayers().remove(LayersToolBar.getLayers().size() - 1);
+        if (fileMenu.pressed) {
+            while (LayersToolBar.getLayers().size() > 1) {
+                LayersToolBar.getLayers().remove(LayersToolBar.getLayers().size() - 1);
+            }
+
+            LayersToolBar.getLayers().get(0).getShapesEnque().clear();
+
+            activeSubMenu = "Nothing";
+
         }
-
-        LayersToolBar.getLayers().get(0).getShapesEnque().clear();
-
-        activeSubMenu = "Nothing";
 
     }
 
     public void Save() throws IOException {
 
-        if (fileButtons.size() < 9) {
+        if (fileMenu.pressed) {
+            if (fileButtons.size() < 9) {
 
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH_mm_ss");
-            long timestamp = System.currentTimeMillis();
-            LocalDateTime datetime = LocalDateTime.ofEpochSecond(timestamp / 1000, 0, java.time.ZoneOffset.UTC);
-            String timestampStr = datetime.format(formatter);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH_mm_ss");
+                long timestamp = System.currentTimeMillis();
+                LocalDateTime datetime = LocalDateTime.ofEpochSecond(timestamp / 1000, 0, java.time.ZoneOffset.UTC);
+                String timestampStr = datetime.format(formatter);
 
-            // create a new file inside the "files" folder at the specified location with a
-            // name based on the current timestamp
-            File newFile = new File("..\\JavaPainter\\files", timestampStr + ".ser");
-            files.add(newFile);
+                // create a new file inside the "files" folder at the specified location with a
+                // name based on the current timestamp
+                File newFile = new File("..\\JavaPainter\\files", timestampStr + ".ser");
+                files.add(newFile);
 
-            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(newFile));
-
-
-            out.writeObject(LayersToolBar.getLayers());
+                ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(newFile));
 
 
-            int y;
-            if (fileButtons.size() == 0) y = s_height / 3 + 70;
-            else y = fileButtons.get(fileButtons.size() - 1).y + 30;
+                out.writeObject(LayersToolBar.getLayers());
 
 
-            fileButtons.add(new FileButton(s_width / 3 + 40, y, 200, 20, newFile.getName(), new Color(100, 150, 255), new Color(255, 100, 100), newFile));
-            out.close();
+                int y;
+                if (fileButtons.size() == 0) y = s_height / 3 + 70;
+                else y = fileButtons.get(fileButtons.size() - 1).y + 30;
 
-        } else {
+
+                fileButtons.add(new FileButton(s_width / 3 + 40, y, 200, 20, newFile.getName(), new Color(100, 150, 255), new Color(255, 100, 100), newFile));
+                out.close();
+
+            } else {
+                activeSubMenu = "Nothing";
+                return;
+            }
             activeSubMenu = "Nothing";
-            return;
+
         }
-        activeSubMenu = "Nothing";
+
 
     }
 
 
     public void Undo() {
-        if (LayersToolBar.getActiveLayer() != null) {
 
-            if (LayersToolBar.getActiveLayer().getShapesEnque().size() != 0)
+        if(editMenu.pressed){
+            if (LayersToolBar.getActiveLayer() != null) {
 
-                LayersToolBar.getActiveLayer().getShapesDeque().add(LayersToolBar.getActiveLayer().getShapesEnque().remove(LayersToolBar.getActiveLayer().getShapesEnque().size() - 1));
+                if (LayersToolBar.getActiveLayer().getShapesEnque().size() != 0)
+
+                    LayersToolBar.getActiveLayer().getShapesDeque().add(LayersToolBar.getActiveLayer().getShapesEnque().remove(LayersToolBar.getActiveLayer().getShapesEnque().size() - 1));
+            }
+
+            activeSubMenu = "nothing";
         }
 
-        activeSubMenu = "nothing";
     }
 
     public void Redo() {
-        if (LayersToolBar.getActiveLayer() != null) if (LayersToolBar.getActiveLayer().getShapesDeque().size() != 0)
-            LayersToolBar.getActiveLayer().getShapesEnque().add(LayersToolBar.getActiveLayer().getShapesDeque().remove(LayersToolBar.getActiveLayer().getShapesDeque().size() - 1));
-        activeSubMenu = "nothing";
+
+        if(editMenu.pressed){
+            if (LayersToolBar.getActiveLayer() != null) if (LayersToolBar.getActiveLayer().getShapesDeque().size() != 0)
+                LayersToolBar.getActiveLayer().getShapesEnque().add(LayersToolBar.getActiveLayer().getShapesDeque().remove(LayersToolBar.getActiveLayer().getShapesDeque().size() - 1));
+            activeSubMenu = "nothing";
+        }
+
     }
 
 

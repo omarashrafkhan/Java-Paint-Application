@@ -1,5 +1,8 @@
 Shortcuts for new save and open: 'n', 's' ,'o'
 Shortcuts for undo and redo: 'u','r'
 
+link to the youtube video: https://youtu.be/9MqBWqCxKjo
+
+
 Note: Some icons may not load up due to file directory issue, so please check that out. File is used in: Shapetoolbar, Menubar and LayerBar
 Also note that when you select and remove a layer they get renamed to maintain their position accordingly
