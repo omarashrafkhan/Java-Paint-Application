@@ -282,7 +282,6 @@ public class MenuBar extends Toolbar {
                     try {
 
                         ObjectInputStream in = new ObjectInputStream(new FileInputStream(filebutton.getFile()));
-                        System.out.println("here1");
                         ArrayList<Layer> deserializedList = (ArrayList<Layer>) in.readObject();
                         LayersToolBar.setLayers(deserializedList);
 
