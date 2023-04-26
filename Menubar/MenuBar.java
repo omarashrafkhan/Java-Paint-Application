@@ -16,6 +16,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class MenuBar extends Toolbar {
@@ -128,7 +130,7 @@ public class MenuBar extends Toolbar {
 
     //New, open, save, undo, redo functions of the submenus
     public void Open(Graphics g) {
-        if (fileMenu.pressed) {
+
             if (ShapeToolBar.getActiveShape() != null) {
                 ShapeToolBar.getActiveShape().current_image = ShapeToolBar.getActiveShape().image_depressed;
                 ShapeToolBar.setActiveShape(null);
@@ -162,11 +164,10 @@ public class MenuBar extends Toolbar {
                 fileButton.paintFileButton(g);
             }
 
-        }
+
     }
 
     public void New() {
-        if (fileMenu.pressed) {
             while (LayersToolBar.getLayers().size() > 1) {
                 LayersToolBar.getLayers().remove(LayersToolBar.getLayers().size() - 1);
             }
@@ -175,13 +176,13 @@ public class MenuBar extends Toolbar {
 
             activeSubMenu = "Nothing";
 
-        }
+
 
     }
 
     public void Save() throws IOException {
 
-        if (fileMenu.pressed) {
+
             if (fileButtons.size() < 9) {
 
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH_mm_ss");
@@ -214,7 +215,7 @@ public class MenuBar extends Toolbar {
             }
             activeSubMenu = "Nothing";
 
-        }
+
 
 
     }
@@ -222,7 +223,7 @@ public class MenuBar extends Toolbar {
 
     public void Undo() {
 
-        if(editMenu.pressed){
+
             if (LayersToolBar.getActiveLayer() != null) {
 
                 if (LayersToolBar.getActiveLayer().getShapesEnque().size() != 0)
@@ -231,17 +232,17 @@ public class MenuBar extends Toolbar {
             }
 
             activeSubMenu = "nothing";
-        }
+
 
     }
 
     public void Redo() {
 
-        if(editMenu.pressed){
+
             if (LayersToolBar.getActiveLayer() != null) if (LayersToolBar.getActiveLayer().getShapesDeque().size() != 0)
                 LayersToolBar.getActiveLayer().getShapesEnque().add(LayersToolBar.getActiveLayer().getShapesDeque().remove(LayersToolBar.getActiveLayer().getShapesDeque().size() - 1));
             activeSubMenu = "nothing";
-        }
+
 
     }
 
@@ -263,13 +264,16 @@ public class MenuBar extends Toolbar {
                 }
             }
 
+            if(menu.pressed){
+                for (SubMenu item : menu.getSubMenus()) {
+                    if (item.IsClicked(e.getX(), e.getY())) {
+                        activeSubMenu = item.title;
+                    }
 
-            for (SubMenu item : menu.getSubMenus()) {
-                if (item.IsClicked(e.getX(), e.getY())) {
-                    activeSubMenu = item.title;
                 }
 
             }
+
             if (close.IsClicked(e.getX(), e.getY()) && close != null) {
                 activeSubMenu = "nothing";
             }
@@ -290,6 +294,15 @@ public class MenuBar extends Toolbar {
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
+
+                    Timer timer = new Timer();
+                    timer.schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            activeSubMenu = "nothing";
+                        }
+                    },200);
+
 
                 }
             }
