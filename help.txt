@@ -1,5 +1,6 @@
 Shortcuts for new save and open: 'n', 's' ,'o'
 Shortcuts for undo and redo: 'u','r'
+You can also use keyUp and keyDown to move layer Up or Down
 
 link to the youtube video: https://youtu.be/9MqBWqCxKjo
 

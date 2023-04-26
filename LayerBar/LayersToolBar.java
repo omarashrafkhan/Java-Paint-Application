@@ -18,15 +18,12 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import static java.awt.event.KeyEvent.*;
+
 
 public class LayersToolBar extends Toolbar {
     private static Layer activeLayer;
     private static ArrayList<Layer> layers;
-
-    public static Layer getActiveLayer() {
-        return activeLayer;
-    }
-
     private ArrayList<ImageIcon> images;
     private JPanel panel;
     private Method[] methods = LayersToolBar.class.getDeclaredMethods();
@@ -43,12 +40,15 @@ public class LayersToolBar extends Toolbar {
     private Hexagon currentHexagon;
     private RA_Triangle currentRAtriangle;
     private Bezier currentBezierCurve;
-
     public LayersToolBar(JPanel panel) {
         super(new Point(0, 0), new Dimension(300, Toolkit.getDefaultToolkit().getScreenSize().height), Color.lightGray, "Layers Tool Bar");
         this.panel = panel;
         this.startPosition.x = s_width - this.dimension.width;
         initialize();
+    }
+
+    public static Layer getActiveLayer() {
+        return activeLayer;
     }
 
     public static ArrayList<Layer> getLayers() {
@@ -208,7 +208,11 @@ public class LayersToolBar extends Toolbar {
 
     @Override
     public void keyPress(KeyEvent e) {
-
+        int keyCode = e.getKeyCode();
+        if (keyCode == KeyEvent.VK_UP) {
+            Up();return;
+        }
+        else if(keyCode == VK_DOWN) Down();return;
     }
 
     private boolean withinBounds(MouseEvent e) {
@@ -327,7 +331,7 @@ public class LayersToolBar extends Toolbar {
             if (ShapeToolBar.getActiveShape() != null) {
                 switch (ShapeToolBar.getActiveShape().title) {
                     case "Circle pressed.png" -> {
-                       // currentCircle.resizing = false;
+                        // currentCircle.resizing = false;
                         currentCircle = null;
                     }
                     case "Rectangle pressed.png" -> currentRectangle = null;
@@ -388,7 +392,9 @@ public class LayersToolBar extends Toolbar {
                         currentHexagon.setRadius((int) (Math.sqrt(dx_h * dx_h + dy_h * dy_h) / Math.sqrt(3)));
                     }
                     case "RA triangle pressed.png" -> currentRAtriangle.setEnd(e.getPoint());
-                    case "Bezier pressed.png" -> {if(ColorToolBar.getStrokeVal()>0) currentBezierCurve.mouseDrag(e);}
+                    case "Bezier pressed.png" -> {
+                        if (ColorToolBar.getStrokeVal() > 0) currentBezierCurve.mouseDrag(e);
+                    }
                 }
 
 
