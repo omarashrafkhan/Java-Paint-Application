@@ -1,59 +1,39 @@
 package ColorBar;
 
 import Toplevelclasses.ActiveButton;
-import Toplevelclasses.ToggleButton;
 
 import java.awt.*;
 
 public class GradientWindow {
+    private static final GradientWindow instance = new GradientWindow();
+    final int editColors_x = 580;
+    final int editColors_y = 30;
+    private final int WIDTH = 200;
+    private final int HEIGHT = 200;
     //Color to show in the edit color panel
     private Color tempColor = Color.black;
     //select button to select color from the gradient
     private ActiveButton selectButton;
-
-    public Color getTempColor() {
-        return tempColor;
-    }
-
-    public ActiveButton getSelectButton() {
-        return selectButton;
-    }
-
     //color gradient for the edit colors
     private Color[][] gradient;
-
-    public ActiveButton getCloseEditColors() {
-        return closeEditColors;
-    }
-
     //Closing button for edit colors
     private ActiveButton closeEditColors;
-    private static GradientWindow instance = new GradientWindow();
-    final int editColors_x = 580;
-    final int editColors_y = 30;
 
     private GradientWindow() {
 
 
         closeEditColors = new ActiveButton(editColors_x + 290, editColors_y + 175, 60, 20, "Close");
         selectButton = new ActiveButton(editColors_x + 125, editColors_y + 450, 60, 20, "Select");
+        gradient = initializeArray();
 
-
-
-        gradient = new Color[200][200];
     }
 
-
-    public  static GradientWindow getInstance(){
+    public static GradientWindow getInstance() {
         return instance;
     }
 
-    public void paintGradient(Graphics g){
-        int WIDTH = 200;
-        int HEIGHT = 200;
-
-        // 2D array to store color gradient
-
+    private Color[][] initializeArray() {
+        Color[][] colorArray = new Color[200][200];
         Color[] colors = {
                 new Color(255, 0, 0), // Red
                 new Color(255, 255, 0), // Yellow
@@ -75,9 +55,33 @@ public class GradientWindow {
                 int green = (int) ((1 - fraction) * colors[index1].getGreen() + fraction * colors[index2].getGreen());
                 int blue = (int) ((1 - fraction) * colors[index1].getBlue() + fraction * colors[index2].getBlue());
 
-                gradient[y][x] = new Color(red, green, blue); // create color object and store in gradient array
+                // adjust RGB values based on x-coordinate
+                //remove 0.5 to make them more light or remove code altogether to remove colors getting lighter
+                double xFraction = (double) x / WIDTH;
+                red += (int) (xFraction * (255 - red) * 0.5);
+                green += (int) (xFraction * (255 - green) * 0.5);
+                blue += (int) (xFraction * (255 - blue) * 0.5);
+
+                colorArray[y][x] = new Color(red, green, blue); // create color object and store in gradient array
             }
         }
+        return colorArray;
+    }
+
+    public Color getTempColor() {
+        return tempColor;
+    }
+
+    public ActiveButton getSelectButton() {
+        return selectButton;
+    }
+
+    public ActiveButton getCloseEditColors() {
+        return closeEditColors;
+    }
+
+    public void paintGradient(Graphics g) {
+
 
         int startx = editColors_x + 50;
         int starty = editColors_y + 200;
@@ -122,11 +126,6 @@ public class GradientWindow {
         if (x > editColors_x + 50 && x < editColors_x + 50 + 200 && y > editColors_y + 200 && y < editColors_y + 200 + 200)
             tempColor = gradient[x - (editColors_x + 50)][y - (editColors_y + 200)];
     }
-
-
-
-
-
 
 
 }
