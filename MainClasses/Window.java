@@ -43,7 +43,7 @@ public class Window extends JPanel implements MouseInputListener, KeyListener {
         toolbars.add(new ShapeToolBar(panel));
         toolbars.add(new LayersToolBar(panel));
 
-        gridButton = new GridButton();
+        gridButton = GridButton.getInstance();
 
 
     }
@@ -125,23 +125,23 @@ public class Window extends JPanel implements MouseInputListener, KeyListener {
 
     public void paintGridLines(Graphics g) {
         g.setColor(Color.lightGray);
-        if (gridButton.val != 0) {
+        if (gridButton.getVal() != 0) {
             int x = toolbars.get(2).startPosition.x + toolbars.get(2).dimension.width + 20;
             int y = toolbars.get(1).startPosition.y + toolbars.get(1).dimension.height + 20;
             int width = s_width - toolbars.get(2).dimension.width - toolbars.get(3).dimension.width - 40;
             int height = s_height - (toolbars.get(0).dimension.height + toolbars.get(1).dimension.height) - 60;
-            int horizLines = height / gridButton.val;
-            int vertLines = width / gridButton.val;
+            int horizLines = height / gridButton.getVal();
+            int vertLines = width / gridButton.getVal();
 
             for (int i = 0; i < vertLines+1; i++) {
                 g.drawLine(x, y, x, y + height);
-                x += gridButton.val;
+                x += gridButton.getVal();
             }
 
             x = toolbars.get(2).startPosition.x + toolbars.get(2).dimension.width + 20;
             for (int i = 0; i < horizLines; i++) {
                 g.drawLine(x, y, x + width, y);
-                y += gridButton.val;
+                y += gridButton.getVal();
             }
         }
 
@@ -181,10 +181,11 @@ public class Window extends JPanel implements MouseInputListener, KeyListener {
 
     @Override
     public void mouseMoved(MouseEvent e) {
-       if(toolbars.get(0).isWithinBounds(e.getX(),e.getY())) toolbars.get(0).mouseMove(e);
-       if(toolbars.get(1).isWithinBounds(e.getX(),e.getY())) toolbars.get(1).mouseMove(e);
-       if(toolbars.get(2).isWithinBounds(e.getX(),e.getY())) toolbars.get(2).mouseMove(e);
-       if(toolbars.get(3).isWithinBounds(e.getX(),e.getY())) toolbars.get(3).mouseMove(e);
+        for(Toolbar toolbar:toolbars){
+            if(toolbar.isWithinBounds(e.getX(),e.getY())){
+                toolbar.mouseMove(e);
+            }
+        }
     }
 
     @Override

@@ -8,9 +8,21 @@ import java.util.TimerTask;
 
 public class GridButton extends Button {
 
-    public int val;
+    private int val;
 
-    public GridButton() {
+    private static GridButton instance = new GridButton();
+
+    public static GridButton getInstance(){
+        return instance;
+    }
+
+    public int getVal(){
+        return val;
+    }
+
+
+
+    private GridButton() {
         x = ColorToolBar.getStroke().x + 200;
         y = ColorToolBar.getStroke().y;
         width = ColorToolBar.getStroke().width;
