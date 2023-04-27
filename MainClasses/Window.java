@@ -107,11 +107,10 @@ public class Window extends JPanel implements MouseInputListener, KeyListener {
 
         gridButton.paintGridButton(g);
 
-        for(Toolbar toolbar : toolbars)
-        {
-            if(toolbar.tooltip.active) {
+        for (Toolbar toolbar : toolbars) {
+            if (toolbar.tooltip.active) {
                 Point mousePosition = MouseInfo.getPointerInfo().getLocation();
-                toolbar.tooltip.showTooltip(g, mousePosition.x+5, mousePosition.y+5);
+                toolbar.tooltip.showTooltip(g, mousePosition.x + 5, mousePosition.y + 5);
             }
         }
 
@@ -133,7 +132,7 @@ public class Window extends JPanel implements MouseInputListener, KeyListener {
             int horizLines = height / gridButton.getVal();
             int vertLines = width / gridButton.getVal();
 
-            for (int i = 0; i < vertLines+1; i++) {
+            for (int i = 0; i < vertLines + 1; i++) {
                 g.drawLine(x, y, x, y + height);
                 x += gridButton.getVal();
             }
@@ -172,17 +171,17 @@ public class Window extends JPanel implements MouseInputListener, KeyListener {
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        try{
-        toolbars.get(3).mouseDrag(e);
+        try {
+            toolbars.get(3).mouseDrag(e);
 
-        }catch(Exception ignore){
+        } catch (Exception ignore) {
         }
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        for(Toolbar toolbar:toolbars){
-            if(toolbar.isWithinBounds(e.getX(),e.getY())){
+        for (Toolbar toolbar : toolbars) {
+            if (toolbar.isWithinBounds(e.getX(), e.getY())) {
                 toolbar.mouseMove(e);
             }
         }
