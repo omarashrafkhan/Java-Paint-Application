@@ -4,7 +4,6 @@ import Shapes.Shape;
 import Toplevelclasses.ToggleButton;
 
 import java.awt.*;
-import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Layer extends ToggleButton  {

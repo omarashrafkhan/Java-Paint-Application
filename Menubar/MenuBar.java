@@ -173,6 +173,7 @@ public class MenuBar extends Toolbar {
             }
 
             LayersToolBar.getLayers().get(0).getShapesEnque().clear();
+            LayersToolBar.getLayers().get(0).title = "Layer 0";
 
             activeSubMenu = "Nothing";
 

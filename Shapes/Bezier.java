@@ -2,21 +2,23 @@ package Shapes;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 public class Bezier extends Shape {
 
 
-
+    ArrayList<Point> points;
     private Point end, control, cubicControl;
 
     public Bezier(int x, int y, Color stroke, int strokeVal) {
 
-        // start = new Point(x, y);
 
         this.x = x;
         this.y = y;
         this.stroke = stroke;
         this.strokeVal = strokeVal;
+        points = new ArrayList<>();
+
     }
 
 
@@ -39,18 +41,18 @@ public class Bezier extends Shape {
 
 
     public void mousePress(MouseEvent e) {
-//        if (start == null) {
-//            start = e.getPoint();
         if (end == null) {
 
 
             end = e.getPoint();
         } else if (control == null) {
 
-            control = new Point((int) (x + (end.x - x) * 0.25), (int) (y + (end.y - y) * 0.25));
+            control = e.getPoint();
+//
         } else if (cubicControl == null) {
 
-            cubicControl = new Point((int) (x + (end.x - x) * 0.75), (int) (y + (end.y - y) * 0.75));
+            cubicControl = e.getPoint();
+//
         }
     }
 
@@ -73,25 +75,30 @@ public class Bezier extends Shape {
     }
 
 
-    public void drawQuadratic(Graphics g){
-        for (double t = 0; t < 1; t += 0.01) {
+    public void drawQuadratic(Graphics g) {
+        points.clear();
+        for (double t = 0; t < 1; t += 0.001) {
             int x1 = quadratic(x, control.x, end.x, t);
             int y1 = quadratic(y, control.y, end.y, t);
-            int x2 = quadratic(x, control.x, end.x, t + 0.01);
-            int y2 = quadratic(y, control.y, end.y, t + 0.01);
-            g.drawLine(x1, y1, x2, y2);
+
+            points.add(new Point(x1, y1));
+        }
+        for (int i = 0; i < points.size() - 1; i++) {
+            g.drawLine(points.get(i).x, points.get(i).y, points.get(i + 1).x, points.get(i + 1).y);
         }
     }
 
 
-
-    private void drawCubic(Graphics g){
-        for (double t = 0; t < 1; t += 0.01) {
+    private void drawCubic(Graphics g) {
+        points.clear();
+        for (double t = 0; t < 1; t += 0.001) {
             int x1 = cubic(x, control.x, cubicControl.x, end.x, t);
             int y1 = cubic(y, control.y, cubicControl.y, end.y, t);
-            int x2 = cubic(x, control.x, cubicControl.x, end.x, t + 0.01);
-            int y2 = cubic(y, control.y, cubicControl.y, end.y, t + 0.01);
-            g.drawLine(x1, y1, x2, y2);
+
+            points.add(new Point(x1, y1));
+        }
+        for (int i = 0; i < points.size() - 1; i++) {
+            g.drawLine(points.get(i).x, points.get(i).y, points.get(i + 1).x, points.get(i + 1).y);
         }
     }
 
@@ -101,6 +108,8 @@ public class Bezier extends Shape {
         g2d.setColor(stroke);
         g2d.setStroke(new BasicStroke(strokeVal, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
 
+
+//      temp line
         if (x != -1 && end == null) {
 
             PointerInfo pointerInfo = MouseInfo.getPointerInfo();
@@ -108,6 +117,7 @@ public class Bezier extends Shape {
         }
 
 
+//      after end is initialized
         if (x != -1 && end != null && control == null) {
             drawLine(g2d, x, y, end.x, end.y);
         }
@@ -115,29 +125,13 @@ public class Bezier extends Shape {
 
         if (x != -1 && end != null && control != null && cubicControl == null) {
             drawQuadratic(g2d);
-//            for (double t = 0; t < 1; t += 0.01) {
-//                int x1 = quadratic(x, control.x, end.x, t);
-//                int y1 = quadratic(y, control.y, end.y, t);
-//                int x2 = quadratic(x, control.x, end.x, t + 0.01);
-//                int y2 = quadratic(y, control.y, end.y, t + 0.01);
-//                g2d.drawLine(x1, y1, x2, y2);
-//            }
         } else if (cubicControl != null) {
-
             drawCubic(g2d);
-//            for (double t = 0; t < 1; t += 0.01) {
-//                int x1 = cubic(x, control.x, cubicControl.x, end.x, t);
-//                int y1 = cubic(y, control.y, cubicControl.y, end.y, t);
-//                int x2 = cubic(x, control.x, cubicControl.x, end.x, t + 0.01);
-//                int y2 = cubic(y, control.y, cubicControl.y, end.y, t + 0.01);
-//                g2d.drawLine(x1, y1, x2, y2);
-//            }
         }
 
 
         g2d.dispose();
     }
-
 
 
 }

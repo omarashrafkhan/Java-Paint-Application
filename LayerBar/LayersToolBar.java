@@ -341,7 +341,7 @@ public class LayersToolBar extends Toolbar {
                     case "Hexagon pressed.png" -> currentHexagon = null;
                     case "RA triangle pressed.png" -> currentRAtriangle = null;
                     case "Bezier pressed.png" -> {
-                        if (currentBezierCurve.getCubicControl() != null) currentBezierCurve = null;
+                        if (currentBezierCurve!=null && currentBezierCurve.getCubicControl() != null) currentBezierCurve = null;
                     }
                 }
 
