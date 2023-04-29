@@ -27,7 +27,7 @@ public class GridButton extends Button {
         y = ColorToolBar.getStroke().y;
         width = ColorToolBar.getStroke().width;
         height = ColorToolBar.getStroke().height;
-        //c_current = new Color(255, 200, 100);
+
 
         c_depressed= new Color(255, 200, 100);
         c_pressed = new Color(173, 129, 49);

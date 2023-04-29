@@ -74,11 +74,6 @@ public class ShapeToolBar extends Toolbar {
 
             g.drawImage(shapeButton.current_image, shapeButton.x, shapeButton.y, panel);
         }
-
-//        if(tooltip.active) {
-//            Point mousePosition = MouseInfo.getPointerInfo().getLocation();
-//            tooltip.showTooltip(g, mousePosition.x+5, mousePosition.y+5);
-//        }
     }
 
 

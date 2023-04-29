@@ -423,8 +423,6 @@ public class LayersToolBar extends Toolbar {
             for (ActiveButton toolButton : toolButtons) {
 
                 if (toolButton.IsHovered(e.getX(), e.getY())) {
-
-                    //tooltip.setWidth(10);
                     tooltip.setMessage(toolButton.title);
                     tooltip.active = true;
                     break;

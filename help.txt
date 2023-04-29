@@ -2,7 +2,10 @@ Shortcuts for new save and open: 'n', 's' ,'o'
 Shortcuts for undo and redo: 'u','r'
 You can also use keyUp and keyDown to move layer Up or Down
 
-link to the youtube video: https://youtu.be/9MqBWqCxKjo
+link to the youtube video: https://www.youtube.com/watch?v=BgSGcl-GFJU
+
+To use Bezier curve: click once to set start point move the mouse and click again anywhere to select end point and then press and grad to change it into a quadratic
+curve and finally click and drag to change it into cubic curve.
 
 
 Note: Some icons may not load up due to file directory issue, so please check that out. File is used in: Shapetoolbar, Menubar and LayerBar

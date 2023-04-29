@@ -35,9 +35,7 @@ public class Tooltip implements ITooltip {
         FontMetrics fontMetrics = graphics.getFontMetrics();
         int textWidth = fontMetrics.stringWidth(message);
 
-        // adjust tooltip width to fit text
-//        if (textWidth > width - 20) {
-//        }
+
             width = textWidth + 20;
         graphics.setColor(new Color(0, 0, 0, 50));
 

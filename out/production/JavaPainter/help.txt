@@ -4,6 +4,9 @@ You can also use keyUp and keyDown to move layer Up or Down
 
 link to the youtube video: https://youtu.be/9MqBWqCxKjo
 
+To use Bezier curve: click once to set start point move the mouse and click again anywhere to select end point and then press and grad to change it into a quadratic
+curve and finally click and drag to change it into cubic curve.
+
 
 Note: Some icons may not load up due to file directory issue, so please check that out. File is used in: Shapetoolbar, Menubar and LayerBar
 Also note that when you select and remove a layer they get renamed to maintain their position accordingly

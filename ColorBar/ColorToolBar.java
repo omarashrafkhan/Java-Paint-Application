@@ -369,7 +369,8 @@ public class ColorToolBar extends Toolbar {
                     break;
                 } else tooltip.active = false;
             }
-        } else if (e.getX() > 120 && e.getX() < 500 && e.getY() > 35 && e.getY() < 100) {
+        }
+        else if (e.getX() > 120 && e.getX() < 500 && e.getY() > 35 && e.getY() < 100) {
             for (ToggleButton colorButton : colorButtons) {
 
                 if (colorButton.IsHovered(e.getX(), e.getY())) {
@@ -384,23 +385,36 @@ public class ColorToolBar extends Toolbar {
                 } else tooltip.active = false;
             }
 
-        } else if (e.getX() > 545 && e.getX() < 560 && e.getY() > 30 && e.getY() < 45) {
+        }
+        else if (e.getX() > 545 && e.getX() < 560 && e.getY() > 30 && e.getY() < 45) {
             if (strokePlus.IsHovered(e.getX(), e.getY())) {
                 tooltip.setMessage("Increase stroke width");
                 tooltip.active = true;
             } else tooltip.active = false;
-        } else if (e.getX() > 545 && e.getX() < 560 && e.getY() > 50 && e.getY() < 65) {
+        }
+        else if (e.getX() > 545 && e.getX() < 560 && e.getY() > 50 && e.getY() < 65) {
             if (strokeMinus.IsHovered(e.getX(), e.getY())) {
                 tooltip.setMessage("Decrease stroke width");
                 tooltip.active = true;
             } else tooltip.active = false;
-        } else if (e.getX() > 580 && e.getX() < 630 && e.getY() > 30 && e.getY() < 70) {
+        }
+        else if (e.getX() > 580 && e.getX() < 630 && e.getY() > 30 && e.getY() < 70) {
             if (editColors.IsHovered(e.getX(), e.getY())) {
                 tooltip.setMessage("Choose from gradient");
                 tooltip.active = true;
             } else tooltip.active = false;
 
-        } else tooltip.active = false;
+        }
+
+        else if (e.getX() > 635 && e.getX() < 635 + 50 && e.getY() > 30 && e.getY() < 30 + 60) {
+            if (removeFill.IsHovered(e.getX(), e.getY())) {
+                tooltip.setMessage("Click to remove fill");
+                tooltip.active = true;
+            }
+            else tooltip.active = false;
+
+        }
+        else tooltip.active = false;
 
 
     }

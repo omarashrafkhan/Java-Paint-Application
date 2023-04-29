@@ -75,7 +75,7 @@ public class Bezier extends Shape {
     }
 
 
-    public void drawQuadratic(Graphics g) {
+    public void drawQuadratic(Graphics2D g) {
         points.clear();
         for (double t = 0; t < 1; t += 0.001) {
             int x1 = quadratic(x, control.x, end.x, t);
@@ -89,7 +89,7 @@ public class Bezier extends Shape {
     }
 
 
-    private void drawCubic(Graphics g) {
+    private void drawCubic(Graphics2D g) {
         points.clear();
         for (double t = 0; t < 1; t += 0.001) {
             int x1 = cubic(x, control.x, cubicControl.x, end.x, t);

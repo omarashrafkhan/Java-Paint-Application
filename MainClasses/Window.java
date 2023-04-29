@@ -185,6 +185,17 @@ public class Window extends JPanel implements MouseInputListener, KeyListener {
                 toolbar.mouseMove(e);
             }
         }
+
+
+        if (e.getX() > ColorToolBar.getStroke().x + 200 && e.getX() < ColorToolBar.getStroke().x + 200 + 30 && e.getY() > 30 && e.getY() < 30 + 60) {
+            if (gridButton.IsHovered(e.getX(), e.getY())) {
+                toolbars.get(1).tooltip.setMessage("Click to change Grid size");
+                toolbars.get(1).tooltip.active = true;
+
+            } else toolbars.get(1).tooltip.active = false;
+        }
+
+
     }
 
     @Override
@@ -202,7 +213,6 @@ public class Window extends JPanel implements MouseInputListener, KeyListener {
             }
         }
     }
-
     @Override
     public void keyReleased(KeyEvent e) {
 

@@ -5,13 +5,7 @@ import java.io.Serializable;
 
 public class ToggleButton extends Button implements Serializable {
 
-   // public int x;
-   // public int y;
-   // public String title;
 
-//    public ToggleButton() {
-//
-//    }
 
 
     public ToggleButton(int x, int y, int width, int height, Image i_depressed, Image i_pressed, String title) {
