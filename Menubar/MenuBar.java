@@ -193,7 +193,7 @@ public class MenuBar extends Toolbar {
 
                 // create a new file inside the "files" folder at the specified location with a
                 // name based on the current timestamp
-                File newFile = new File("..\\JavaPainter\\files", timestampStr + ".ser");
+                File newFile = new File("..\\omar_khan_26985_Assignment4\\files", timestampStr + ".ser");
                 files.add(newFile);
 
                 ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(newFile));

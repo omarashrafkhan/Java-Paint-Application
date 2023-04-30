@@ -48,7 +48,7 @@ public class ShapeToolBar extends Toolbar {
 
         }
 
-        int y = 150;
+        int y = 130;
         for (int i = 0; i < 16; i += 2) {
             ImageIcon icon1 = images.get(i + 1);
             ImageIcon icon2 = images.get(i);

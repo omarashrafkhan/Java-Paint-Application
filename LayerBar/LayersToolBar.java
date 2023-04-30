@@ -165,13 +165,20 @@ public class LayersToolBar extends Toolbar {
         Color shadowColor = new Color(0, 0, 0, 100); // semi-transparent black
         g.setColor(shadowColor);
         Point panel = new Point(startPosition.x + 25, startPosition.y + 305);
-        g.fillRect(panel.x, panel.y, 250, 500);
+        g.fillRect(panel.x, panel.y, 250, s_height-panel.y-50);
 
         // Draw panel
         g.setColor(Color.white);
-        g.fillRect(startPosition.x + 21, startPosition.y + 300, 250, 500);
+        g.fillRect(panel.x-4, panel.y-5, 250, s_height-panel.y-50);
+
+
+
+
+
         g.setColor(Color.black);
-        g.drawRect(startPosition.x + 21, startPosition.y + 300, 250, 500);
+        g.drawRect(panel.x-4, panel.y-5, 250, s_height-panel.y-50);
+
+
         g.drawLine(startPosition.x + 21, startPosition.y + 330, startPosition.x + 21 + 250, startPosition.y + 330);
         g.setFont(new Font("Arial", Font.BOLD, 15));
         g.drawString("Layers", startPosition.x + 30, startPosition.y + 320);
