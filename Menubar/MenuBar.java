@@ -106,7 +106,7 @@ public class MenuBar extends Toolbar {
 
 
         Point point = new Point(s_width / 3 + 40, s_height / 3 + 70);
-        File[] fileArray = new File("..\\JavaPainter\\files").listFiles();
+        File[] fileArray = new File("..\\omar_khan_26985_Assignment4\\files").listFiles();
         files = new ArrayList<>();
 
 

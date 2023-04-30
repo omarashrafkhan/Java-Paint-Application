@@ -188,8 +188,8 @@ public class LayersToolBar extends Toolbar {
         images = new ArrayList<>();
 
         for (String shapeName : new String[]{"ArrowUp", "ArrowDown", "Add", "remove"}) {
-            String pressedFilename = String.format("..\\JavaPainter\\icons\\%s pressed.png", shapeName);
-            String unpressedFilename = String.format("..\\JavaPainter\\icons\\%s unpressed.png", shapeName);
+            String pressedFilename = String.format("..\\omar_khan_26985_Assignment4\\icons\\%s pressed.png", shapeName);
+            String unpressedFilename = String.format("..\\omar_khan_26985_Assignment4\\icons\\%s unpressed.png", shapeName);
             images.add(new ImageIcon(pressedFilename));
             images.add(new ImageIcon(unpressedFilename));
         }
