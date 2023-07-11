@@ -1,8 +1,11 @@
+Good day! 
+This is my first mega Java project. It includes Layers functions and Bezier curve from photoshop. The rest is just basic paint application. hope you like it!
+
+
 Shortcuts for new save and open: 'n', 's' ,'o'
 Shortcuts for undo and redo: 'u','r'
 You can also use keyUp and keyDown to move layer Up or Down
 
-link to the youtube video: https://www.youtube.com/watch?v=BgSGcl-GFJU
 
 To use Bezier curve: click once to set start point move the mouse(before clicking again) and click again anywhere to select end point and then press and drag to change it into a quadratic
 curve and finally press and drag to change it into cubic curve.
