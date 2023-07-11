@@ -106,7 +106,7 @@ public class MenuBar extends Toolbar {
 
 
         Point point = new Point(s_width / 3 + 40, s_height / 3 + 70);
-        File[] fileArray = new File("..\\omar_khan_26985_Assignment4\\files").listFiles();
+        File[] fileArray = new File("..\\Java Paint Application\\files").listFiles();
         files = new ArrayList<>();
 
 
@@ -193,7 +193,7 @@ public class MenuBar extends Toolbar {
 
                 // create a new file inside the "files" folder at the specified location with a
                 // name based on the current timestamp
-                File newFile = new File("..\\omar_khan_26985_Assignment4\\files", timestampStr + ".ser");
+                File newFile = new File("..\\Java Paint Application\\files", timestampStr + ".ser");
                 files.add(newFile);
 
                 ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(newFile));

@@ -41,8 +41,8 @@ public class ShapeToolBar extends Toolbar {
 
         for (String shapeName : new String[] { "Circle", "EQ triangle", "Hexagon", "pentagram", "RA triangle",
                 "Rectangle", "FreeDraw", "Bezier" }) {
-            String pressedFilename = String.format("..\\omar_khan_26985_Assignment4\\icons\\%s pressed.png", shapeName);
-            String unpressedFilename = String.format("..\\omar_khan_26985_Assignment4\\icons\\%s unpressed.png", shapeName);
+            String pressedFilename = String.format("..\\Java Paint Application\\icons\\%s pressed.png", shapeName);
+            String unpressedFilename = String.format("..\\Java Paint Application\\icons\\%s unpressed.png", shapeName);
             images.add(new ImageIcon(pressedFilename));
             images.add(new ImageIcon(unpressedFilename));
 
